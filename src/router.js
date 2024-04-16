@@ -9,6 +9,9 @@ import Community from "./pages/Community/Community";
 import Setting from "./pages/Setting/Setting";
 
 import Splash from "./pages/Splash/Splash";
+import OnBoarding from "./pages/Splash/OnBoarding";
+
+import Login from "./pages/LoginAndSignUp/Login/Login";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +37,8 @@ const Router = () => {
       }}
     >
       <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="OnBoarding" component={OnBoarding} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   );
