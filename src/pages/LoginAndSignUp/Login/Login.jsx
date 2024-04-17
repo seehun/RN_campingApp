@@ -179,9 +179,9 @@ const styles = StyleSheet.create({
   findPasswordText: {
     fontSize: 12,
     color: "#573353",
-    borderBottomWidth: 1,
-    borderBottomColor: "#573353",
+    textDecorationLine: "underline",
   },
+  //register
   registerWrapper: {
     flexDirection: "row",
     alignItems: "center",

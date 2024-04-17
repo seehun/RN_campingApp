@@ -12,3 +12,6 @@
 
 - 모달
   npm i react-native-modal
+
+- checkbox  
+  npm i react-native-check-box --save

@@ -39,10 +39,11 @@ const Router = () => {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
+      {/* <Stack.Screen name="Register" component={Register} /> */}
       <Stack.Screen name="FindPassword" component={FindPassword} />
       <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
       <Stack.Screen name="MainTab" component={MainTab} />
