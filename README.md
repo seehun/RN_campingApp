@@ -15,3 +15,6 @@
 
 - checkbox  
   npm i react-native-check-box --save
+
+- api  
+  npm i axios

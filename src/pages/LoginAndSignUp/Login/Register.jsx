@@ -9,7 +9,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import CheckBox from "react-native-check-box";
+import axios from "axios";
 
+import { baseURL } from "../../../config";
 import BasicButton from "../../../components/BasicButton";
 
 const Register = ({ navigation }) => {
@@ -20,7 +22,26 @@ const Register = ({ navigation }) => {
   const [autoLogin, setAutoLogin] = useState(false);
   const [agree, setAgree] = useState(false);
 
-  const registerHandler = () => {};
+  const registerHandler = async () => {
+    if (!agree) {
+      //약관동의 안하면 실행 x
+      return;
+    }
+    if (!email || !password || !nickname) {
+      return;
+    }
+    try {
+      const response = await axios.post(`${baseURL}/accounts`, {
+        email: email,
+        password: password,
+        nickname: nickname,
+        phoneNumber: "1234",
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerImageWrapper}>
@@ -39,7 +60,7 @@ const Register = ({ navigation }) => {
               style={styles.inputStyle}
               value={nickname}
               onChangeText={(text) => setNickname(text)}
-              placeholder="name"
+              placeholder="nickname"
             />
           </View>
           {/* email */}
