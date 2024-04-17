@@ -18,3 +18,6 @@
 
 - api  
   npm i axios
+
+- toast  
+  npm install --save react-native-toast-message

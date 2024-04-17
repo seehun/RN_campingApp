@@ -6,10 +6,14 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import CheckBox from "react-native-check-box";
 import axios from "axios";
+import Toast from "react-native-toast-message";
+
+import api from "../../../api/axios";
 
 import { baseURL } from "../../../config";
 import BasicButton from "../../../components/BasicButton";
@@ -18,25 +22,36 @@ const Register = ({ navigation }) => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("01012341234");
 
   const [autoLogin, setAutoLogin] = useState(false);
   const [agree, setAgree] = useState(false);
 
   const registerHandler = async () => {
     if (!agree) {
-      //약관동의 안하면 실행 x
+      Toast.show({
+        type: "info",
+        text1: "약관 동의가 필요합니다",
+      });
       return;
     }
     if (!email || !password || !nickname) {
+      Toast.show({
+        type: "info",
+        text1: "빈 칸을 다 채워주세요!",
+      });
       return;
     }
+    const userData = {
+      email,
+      password,
+      nickname,
+      phoneNumber,
+    };
+    const apiURL = "/accounts";
     try {
-      const response = await axios.post(`${baseURL}/accounts`, {
-        email: email,
-        password: password,
-        nickname: nickname,
-        phoneNumber: "1234",
-      });
+      const response = await api.post(apiURL, userData);
+      Alert.alert("회원가입 성공");
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -44,6 +59,7 @@ const Register = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={styles.container}>
+      <Toast />
       <View style={styles.headerImageWrapper}>
         <Image source={register}></Image>
       </View>
