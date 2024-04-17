@@ -12,6 +12,9 @@ import Splash from "./pages/Splash/Splash";
 import OnBoarding from "./pages/Splash/OnBoarding";
 
 import Login from "./pages/LoginAndSignUp/Login/Login";
+import Register from "./pages/LoginAndSignUp/Login/Register";
+import FindPassword from "./pages/LoginAndSignUp/Login/FindPassword";
+import RegisterSuccess from "./pages/LoginAndSignUp/Login/RegisterSuccess";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +42,9 @@ const Router = () => {
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="FindPassword" component={FindPassword} />
+      <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
       <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   );

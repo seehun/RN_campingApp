@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useRef } from "react";
+import BasicButton from "../../components/BasicButton";
 
 const { width, height } = Dimensions.get("window");
 
@@ -82,14 +83,10 @@ const OnBoarding = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={{ width: width, alignItems: "center" }}>
-          <TouchableOpacity
-            style={styles.startBtn}
-            onPress={() => navigation.navigate("Login")}
-          >
-            <Text>시작하기</Text>
-          </TouchableOpacity>
-        </View>
+        <BasicButton
+          text={"시작하기"}
+          pressHandler={() => navigation.navigate("Login")}
+        />
       )}
     </SafeAreaView>
   );
