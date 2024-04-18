@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "./pages/Home/Home";
+import CampingDetail from "./pages/Home/CampingDetail";
 import Article from "./pages/Article/Article";
 import Add from "./pages/Add/Add";
 import Community from "./pages/Community/Community";
@@ -54,6 +55,7 @@ const Router = () => {
       <Stack.Screen name="FindPassword" component={FindPassword} />
       <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
       {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
+      <Stack.Screen name="CampingDetail" component={CampingDetail} />
     </Stack.Navigator>
   );
 };

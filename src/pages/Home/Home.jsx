@@ -15,7 +15,6 @@ import campingApi from "../../api/campingAxios.js";
 import { encode_APIKEY } from "../../config.js";
 
 import BasicHeader from "../../components/BasicHeader.jsx";
-import menuIcon from "../../assets/icons/HamburgerMenu.png";
 
 const Home = ({ navigation }) => {
   const [campingData, setCampingData] = useState([]);
@@ -46,7 +45,7 @@ const Home = ({ navigation }) => {
           setCampingData(response.data.response.body.items.item);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         initCamping();
       }
     };
@@ -55,7 +54,14 @@ const Home = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={{ marginBottom: 8 }}>
+      <TouchableOpacity
+        style={{ marginBottom: 8 }}
+        onPress={() => {
+          navigation.navigate("CampingDetail", {
+            params: { item: item },
+          });
+        }}
+      >
         <Card style={styles.card}>
           <Card.Cover
             source={{ uri: item.firstImageUrl }}
@@ -73,7 +79,7 @@ const Home = ({ navigation }) => {
                 {item.addr1}
               </Text>
               <Text variant="bodyLarge" style={styles.reservation}>
-                온라인실시간예약
+                {item.resveCl}
               </Text>
             </View>
           </Card.Content>
@@ -145,3 +151,5 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 });
+
+import menuIcon from "../../assets/icons/HamburgerMenu.png";
