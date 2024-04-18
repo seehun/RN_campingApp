@@ -51,8 +51,10 @@ const Register = ({ navigation }) => {
     const apiURL = "/accounts";
     try {
       const response = await api.post(apiURL, userData);
-      Alert.alert("회원가입 성공");
       console.log(response.data);
+      if (response.data.success) {
+        navigation.navigate("RegisterSuccess");
+      }
     } catch (error) {
       console.log(error);
     }

@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "./pages/Home/Home";
 import Article from "./pages/Article/Article";
+import Add from "./pages/Add/Add";
 import Community from "./pages/Community/Community";
 import Setting from "./pages/Setting/Setting";
 
@@ -16,16 +17,22 @@ import Register from "./pages/LoginAndSignUp/Login/Register";
 import FindPassword from "./pages/LoginAndSignUp/Login/FindPassword";
 import RegisterSuccess from "./pages/LoginAndSignUp/Login/RegisterSuccess";
 
+import CustomBottomTab from "./components/CustomBottomTab";
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const renderTabBar = (props) => <CustomBottomTab {...props} />;
 
 const MainTab = () => {
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false, gestureEnabled: false }}
+      tabBar={renderTabBar}
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Article" component={Article} />
+      <Tab.Screen name="Add" component={Add} />
       <Tab.Screen name="Community" component={Community} />
       <Tab.Screen name="Setting" component={Setting} />
     </Tab.Navigator>
@@ -39,14 +46,14 @@ const Router = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="MainTab" component={MainTab} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="Login" component={Login} />
-      {/* <Stack.Screen name="Register" component={Register} /> */}
+      <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="FindPassword" component={FindPassword} />
       <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
-      <Stack.Screen name="MainTab" component={MainTab} />
+      {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
     </Stack.Navigator>
   );
 };

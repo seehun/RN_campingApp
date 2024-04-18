@@ -29,8 +29,8 @@ const RegisterSuccess = ({ navigation }) => {
           </View>
         </View>
         <BasicButton
-          text={"캠핑윗미 이용하러가기"}
-          pressHandler={() => navigation.navigate("MainTab")}
+          text={"로그인 하러가기"}
+          pressHandler={() => navigation.navigate("Login")}
         />
       </View>
     </SafeAreaView>

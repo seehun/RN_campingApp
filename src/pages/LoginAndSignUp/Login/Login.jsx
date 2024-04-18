@@ -10,13 +10,27 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import BasicButton from "../../../components/BasicButton";
+import api from "../../../api/axios";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginHandler = () => {
-    console.log("1");
+  const loginHandler = async () => {
+    const userData = {
+      email,
+      password,
+    };
+    const apiURL = "/auth";
+    try {
+      const response = await api.post(apiURL, userData);
+      console.log(response.data);
+      if (response.data.success) {
+        navigation.navigate("MainTab");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
