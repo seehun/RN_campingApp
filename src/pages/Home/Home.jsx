@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   TouchableOpacity,
@@ -8,17 +7,18 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Avatar, Button, Card, Text } from "react-native-paper";
 
 import api from "../../api/axios.js";
 import campingApi from "../../api/campingAxios.js";
 import { encode_APIKEY } from "../../config.js";
-import { decode_APIKEY } from "../../config.js";
 
 import BasicHeader from "../../components/BasicHeader.jsx";
 import menuIcon from "../../assets/icons/HamburgerMenu.png";
 
 const Home = ({ navigation }) => {
+  const [campingData, setCampingData] = useState([]);
   useEffect(() => {
     //user data  -> 전역상태로 저장시켜야됨.
     // const init = async () => {
@@ -42,7 +42,8 @@ const Home = ({ navigation }) => {
       try {
         const response = await campingApi.get(apiURL, { params: paramsData });
         if (response.data.response.body) {
-          console.log(response.data.response.body.items);
+          // console.log(response.data.response.body.items.item);
+          setCampingData(response.data.response.body.items.item);
         }
       } catch (error) {
         console.log(error);
@@ -52,6 +53,34 @@ const Home = ({ navigation }) => {
     initCamping();
   }, []);
 
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity style={{ marginBottom: 8 }}>
+        <Card style={styles.card}>
+          <Card.Cover
+            source={{ uri: item.firstImageUrl }}
+            style={styles.cardImg}
+          />
+          <Card.Content style={styles.cardInfo}>
+            <View style={styles.cardTitle}>
+              <Text variant="bodySmall" style={{ color: "#919191" }}>
+                {`${item.facltDivNm} ${item.mangeDivNm}`}
+              </Text>
+              <Text variant="titleMedium">{item.facltNm}</Text>
+            </View>
+            <View style={styles.cardDetail}>
+              <Text variant="bodySmall" style={styles.address}>
+                {item.addr1}
+              </Text>
+              <Text variant="bodyLarge" style={styles.reservation}>
+                온라인실시간예약
+              </Text>
+            </View>
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
+    );
+  };
   const menuHandler = () => {
     console.log(1);
   };
@@ -63,7 +92,16 @@ const Home = ({ navigation }) => {
           leftHandler={menuHandler}
           title={"캠핑윗미"}
         />
-        <ScrollView></ScrollView>
+        <ScrollView style={styles.cardsContainer}>
+          {campingData.length > 0 && (
+            <FlatList
+              data={campingData}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.contentId}
+              removeClippedSubviews
+            />
+          )}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -79,23 +117,31 @@ const styles = StyleSheet.create({
   wrapper: {
     marginHorizontal: 20,
   },
-  //header
-  basicHeaderWrapper: {
+  //card
+  cardsContainer: {
+    marginTop: 12,
+  },
+  card: {
+    backgroundColor: "#fff",
+    padding: 8,
+  },
+  cardImg: {
+    marginBottom: 6,
+    height: 148,
+  },
+  cardTitle: {
+    marginBottom: 24,
+  },
+  cardDetail: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
-  },
-  headerBtn: {
-    width: 44,
-    height: 44,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(87, 51, 83,0.1)",
-    borderRadius: 22,
   },
-  headerText: {
-    fontSize: 18,
+  address: {
+    color: "#707070",
+  },
+  reservation: {
+    color: "#FC9D45",
     fontWeight: "700",
-    color: "#573353",
   },
 });
