@@ -8,7 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Card, Text } from "react-native-paper";
+import { Card, Text } from "react-native-paper";
 
 import api from "../../api/axios.js";
 import campingApi from "../../api/campingAxios.js";

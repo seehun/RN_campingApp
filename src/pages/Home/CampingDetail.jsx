@@ -13,7 +13,7 @@ import BasicHeader from "../../components/BasicHeader";
 const CampingDetail = ({ navigation, route }) => {
   const { item } = route.params.params;
   const callHandler = () => {};
-  console.log(item);
+  // console.log(item);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerWrapper}>
