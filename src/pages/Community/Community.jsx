@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import useStore from "../../store.js";
@@ -39,20 +40,30 @@ const Community = ({ navigation, route }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() =>
+          navigation.navigate("CommunityDetail", {
+            params: { item: item },
+          })
+        }
+      >
         <View style={styles.cardHeaderWrapper}>
           <View style={styles.cardHeader}>
             <View style={styles.cardHeaderLeft}>
               <Text style={styles.cardNickname}>{item.nickname}</Text>
             </View>
             <TouchableOpacity style={styles.cardHeaderRight}>
-              <Image source={goDetailIcon} style={{ width: 18, height: 16 }} />
+              <Image source={shareIcon} style={{ width: 18, height: 16 }} />
             </TouchableOpacity>
           </View>
         </View>
         <View style={{ borderWidth: 0.5, borderColor: "#FFF6ED" }}></View>
         <View style={styles.cardBodyWrapper}>
-          <Text style={styles.bodyText}>{item.subject}</Text>
+          <View>
+            <Text style={styles.bodyText}>{item.subject}</Text>
+          </View>
+
           <View style={styles.bottomFeatures}>
             <TouchableOpacity style={styles.likes}>
               <Image source={like} style={{ width: 16, height: 14 }} />
@@ -64,7 +75,7 @@ const Community = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -90,12 +101,16 @@ const Community = ({ navigation, route }) => {
           style={styles.cardsContainer}
           showsVerticalScrollIndicator={false}
         >
-          <FlatList
-            data={communityeData}
-            renderItem={renderItem}
-            removeClippedSubviews
-            style={styles.cardList}
-          />
+          {communityeData.length > 0 ? (
+            <FlatList
+              data={communityeData}
+              renderItem={renderItem}
+              removeClippedSubviews
+              style={styles.cardList}
+            />
+          ) : (
+            <ActivityIndicator size="large" />
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -178,6 +193,6 @@ const styles = StyleSheet.create({
 
 import menuIcon from "../../assets/icons/HamburgerMenu.png";
 import basicProfile from "../../assets/images/basicProfile.jpeg";
-import goDetailIcon from "../../assets/icons/goDetail.png";
+import shareIcon from "../../assets/icons/goDetail.png";
 import like from "../../assets/icons/like.png";
 import reply from "../../assets/icons/reply.png";

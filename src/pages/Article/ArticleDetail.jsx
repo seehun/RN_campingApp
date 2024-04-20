@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Image,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
 import { Text } from "react-native-paper";

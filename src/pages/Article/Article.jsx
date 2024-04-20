@@ -7,6 +7,7 @@ import {
   FlatList,
   ImageBackground,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Card, Text } from "react-native-paper";
@@ -14,6 +15,7 @@ import api from "../../api/axios.js";
 import { baseURL } from "../../config.js";
 import SelectDropdown from "react-native-select-dropdown";
 import BasicHeader from "../../components/BasicHeader.jsx";
+import { convertDate } from "../../utils.js";
 
 const Article = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("FAVORITE");
@@ -133,17 +135,8 @@ const Article = ({ navigation }) => {
         console.log(error);
       }
     };
-    //date
-    const dateObj = new Date(item.createDate);
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-    const day = dateObj.getDate();
-    const hours = dateObj.getHours();
-    const minutes = dateObj.getMinutes();
 
-    const formattedDate = `${year}년 ${month}월 ${day}일 ${hours}:${
-      minutes < 10 ? "0" : ""
-    }${minutes}`;
+    const date = convertDate(item.createDate);
 
     return (
       <TouchableOpacity
@@ -175,7 +168,7 @@ const Article = ({ navigation }) => {
               </Text>
               <View style={styles.cardBottom}>
                 <Text variant="bodySmall" style={styles.cardDate}>
-                  {formattedDate}
+                  {date}
                 </Text>
                 <TouchableOpacity
                   style={styles.BookmarkBtn}
@@ -210,13 +203,17 @@ const Article = ({ navigation }) => {
           style={styles.cardsContainer}
           showsVerticalScrollIndicator={false}
         >
-          <FlatList
-            ListHeaderComponent={articleHeader}
-            data={articleData}
-            renderItem={renderItem}
-            removeClippedSubviews
-            style={styles.cardList}
-          />
+          {articleData.length > 0 ? (
+            <FlatList
+              ListHeaderComponent={articleHeader}
+              data={articleData}
+              renderItem={renderItem}
+              removeClippedSubviews
+              style={styles.cardList}
+            />
+          ) : (
+            <ActivityIndicator size="large" />
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>

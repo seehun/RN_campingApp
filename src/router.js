@@ -9,6 +9,7 @@ import Article from "./pages/Article/Article";
 import ArticleDetail from "./pages/Article/ArticleDetail";
 import Add from "./pages/Add/Add";
 import Community from "./pages/Community/Community";
+import CommunityDetail from "./pages/Community/CommunityDetail";
 import Setting from "./pages/Setting/Setting";
 
 import Splash from "./pages/Splash/Splash";
@@ -60,6 +61,7 @@ const Router = () => {
       {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
       <Stack.Screen name="CampingDetail" component={CampingDetail} />
       <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
+      <Stack.Screen name="CommunityDetail" component={CommunityDetail} />
     </Stack.Navigator>
   );
 };

@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Card, Text } from "react-native-paper";
@@ -103,13 +104,15 @@ const Home = ({ navigation }) => {
           }
         />
         <ScrollView style={styles.cardsContainer}>
-          {campingData.length > 0 && (
+          {campingData.length > 0 ? (
             <FlatList
               data={campingData}
               renderItem={renderItem}
               keyExtractor={(item) => item.contentId}
               removeClippedSubviews
             />
+          ) : (
+            <ActivityIndicator size="large" />
           )}
         </ScrollView>
       </View>
