@@ -10,23 +10,17 @@ import {
 import React, { useEffect, useState } from "react";
 import { Card, Text } from "react-native-paper";
 
-import api from "../../api/axios.js";
 import campingApi from "../../api/campingAxios.js";
 import { encode_APIKEY } from "../../config.js";
 
 import BasicHeader from "../../components/BasicHeader.jsx";
+import useStore from "../../store.js";
 
 const Home = ({ navigation }) => {
   const [campingData, setCampingData] = useState([]);
+  const { user } = useStore((state) => state);
+  console.log("1", user);
   useEffect(() => {
-    //user data  -> 전역상태로 저장시켜야됨.
-    // const init = async () => {
-    //   const apiURL = "/accounts/info";
-    //   const response = await api.get(apiURL);
-    //   console.log(response.data);
-    // };
-    // init();
-    //
     //camping
     const initCamping = async () => {
       const apiURL = "/basedList";

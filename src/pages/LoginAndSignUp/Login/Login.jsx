@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
       const response = await api.post(apiURL, userData);
       console.log(response.data);
       if (response.data.success) {
-        navigation.navigate("MainTab");
+        navigation.navigate("LoginMiddleware");
       }
     } catch (error) {
       console.log(error);
