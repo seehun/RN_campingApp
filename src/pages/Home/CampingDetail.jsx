@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { Avatar, Button, Card, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 
 import BasicHeader from "../../components/BasicHeader";
 

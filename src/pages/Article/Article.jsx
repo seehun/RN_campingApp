@@ -15,7 +15,7 @@ import { baseURL } from "../../config.js";
 import SelectDropdown from "react-native-select-dropdown";
 import BasicHeader from "../../components/BasicHeader.jsx";
 
-const Article = () => {
+const Article = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("FAVORITE");
   const [articleData, setArticleData] = useState([]);
   const articleHeader = () => {
@@ -102,7 +102,7 @@ const Article = () => {
   }, []);
 
   const renderItem = ({ item }) => {
-    console.log(baseURL + item.articleImages[0]?.imgPath);
+    // console.log(baseURL + item.articleImages[0]?.imgPath);
 
     const bookmarkHandler = () => {};
     //date
@@ -118,7 +118,14 @@ const Article = () => {
     }${minutes}`;
 
     return (
-      <TouchableOpacity style={{ marginBottom: 8 }} onPress={() => {}}>
+      <TouchableOpacity
+        style={{ marginBottom: 8 }}
+        onPress={() => {
+          navigation.navigate("ArticleDetail", {
+            params: { item: item },
+          });
+        }}
+      >
         <Card style={styles.card}>
           <Card.Cover
             source={{ uri: baseURL + item.articleImages[0]?.imgPath }}

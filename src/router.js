@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./pages/Home/Home";
 import CampingDetail from "./pages/Home/CampingDetail";
 import Article from "./pages/Article/Article";
+import ArticleDetail from "./pages/Article/ArticleDetail";
 import Add from "./pages/Add/Add";
 import Community from "./pages/Community/Community";
 import Setting from "./pages/Setting/Setting";
@@ -56,6 +57,7 @@ const Router = () => {
       <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
       {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
       <Stack.Screen name="CampingDetail" component={CampingDetail} />
+      <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
     </Stack.Navigator>
   );
 };
