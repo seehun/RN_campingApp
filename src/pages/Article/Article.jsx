@@ -92,7 +92,7 @@ const Article = ({ navigation }) => {
       };
       try {
         const response = await api.get(apiURL, { params: paramsData });
-        console.log(response.data.result);
+        // console.log(response.data.result);
         setArticleData(response.data.result);
       } catch (error) {
         console.log(error);
@@ -101,10 +101,38 @@ const Article = ({ navigation }) => {
     getArticle();
   }, []);
 
+  useEffect(() => {
+    const getArticle = async () => {
+      const apiURL = "/article";
+      const paramsData = {
+        sortType: selectedCategory,
+      };
+      try {
+        const response = await api.get(apiURL, { params: paramsData });
+        // console.log(response.data.result);
+        setArticleData(response.data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getArticle();
+  }, [selectedCategory]);
+
   const renderItem = ({ item }) => {
     // console.log(baseURL + item.articleImages[0]?.imgPath);
 
-    const bookmarkHandler = () => {};
+    const bookmarkHandler = async () => {
+      const apiURL = `/article/favorite/${item.id}`;
+      const data = {
+        id: item.id,
+      };
+      try {
+        const response = await api.post(apiURL, data);
+        console.log("bookmark", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     //date
     const dateObj = new Date(item.createDate);
     const year = dateObj.getFullYear();

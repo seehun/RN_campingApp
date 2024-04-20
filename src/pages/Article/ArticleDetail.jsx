@@ -10,11 +10,23 @@ import { Text } from "react-native-paper";
 import React from "react";
 import BasicHeader from "../../components/BasicHeader";
 import { baseURL } from "../../config";
+import api from "../../api/axios.js";
 
 const ArticleDetail = ({ navigation, route }) => {
   const { item } = route.params.params;
   //   console.log(item);
-  const bookmarkHandler = () => {};
+  const bookmarkHandler = async () => {
+    const apiURL = `/article/favorite/${item.id}`;
+    const data = {
+      id: item.id,
+    };
+    try {
+      const response = await api.post(apiURL, data);
+      console.log("bookmark", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerWrapper}>
