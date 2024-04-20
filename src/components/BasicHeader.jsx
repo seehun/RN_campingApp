@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(87, 51, 83,0.1)",
     borderRadius: 22,
+    overflow: "hidden",
   },
   headerText: {
     fontSize: 18,

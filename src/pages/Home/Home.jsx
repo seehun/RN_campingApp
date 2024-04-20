@@ -91,6 +91,16 @@ const Home = ({ navigation }) => {
           left={<Image source={menuIcon} style={{ width: 40, height: 40 }} />}
           leftHandler={menuHandler}
           title={"캠핑윗미"}
+          right={
+            user.profileImagePath ? (
+              <Image
+                source={{ uri: user.profileImagePath }}
+                style={{ width: 44, height: 44 }}
+              />
+            ) : (
+              <Image source={basicProfile} style={{ width: 44, height: 44 }} />
+            )
+          }
         />
         <ScrollView style={styles.cardsContainer}>
           {campingData.length > 0 && (
@@ -147,3 +157,4 @@ const styles = StyleSheet.create({
 });
 
 import menuIcon from "../../assets/icons/HamburgerMenu.png";
+import basicProfile from "../../assets/images/basicProfile.jpeg";

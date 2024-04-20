@@ -9,4 +9,11 @@ const useStore = create((set) => ({
   initUserState: (data) => set({ user: data }),
 }));
 
+// communityCount: 0
+// email: "shoon1999@naver.com"
+// favoriteCount: 2
+// introduce: null
+// nickName: "seehun123"
+// profileImagePath: null
+
 export default useStore;
