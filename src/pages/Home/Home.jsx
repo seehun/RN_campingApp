@@ -103,18 +103,19 @@ const Home = ({ navigation }) => {
             )
           }
         />
-        <ScrollView style={styles.cardsContainer}>
+        <View style={styles.cardsContainer}>
           {campingData.length > 0 ? (
             <FlatList
               data={campingData}
               renderItem={renderItem}
               keyExtractor={(item) => item.contentId}
               removeClippedSubviews
+              showsVerticalScrollIndicator={false}
             />
           ) : (
             <ActivityIndicator size="large" />
           )}
-        </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );

@@ -199,12 +199,10 @@ const Article = ({ navigation }) => {
           }
           rightHandler={searchHandler}
         />
-        <ScrollView
-          style={styles.cardsContainer}
-          showsVerticalScrollIndicator={false}
-        >
+        <View style={styles.cardsContainer}>
           {articleData.length > 0 ? (
             <FlatList
+              showsVerticalScrollIndicator={false}
               ListHeaderComponent={articleHeader}
               data={articleData}
               renderItem={renderItem}
@@ -214,7 +212,7 @@ const Article = ({ navigation }) => {
           ) : (
             <ActivityIndicator size="large" />
           )}
-        </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );

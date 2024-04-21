@@ -97,21 +97,19 @@ const Community = ({ navigation, route }) => {
             )
           }
         />
-        <ScrollView
-          style={styles.cardsContainer}
-          showsVerticalScrollIndicator={false}
-        >
+        <View style={styles.cardsContainer}>
           {communityeData.length > 0 ? (
             <FlatList
               data={communityeData}
               renderItem={renderItem}
               removeClippedSubviews
               style={styles.cardList}
+              showsVerticalScrollIndicator={false}
             />
           ) : (
             <ActivityIndicator size="large" />
           )}
-        </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );
