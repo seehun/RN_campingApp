@@ -3,17 +3,49 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
   Text,
   FlatList,
+  TextInput,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BasicHeader from "../../components/BasicHeader";
 import { convertDate } from "../../utils";
+import api from "../../api/axios.js";
 
 const CommunityDetail = ({ navigation, route }) => {
   const { item } = route.params.params;
+  const inputRef = useRef();
+  const [keyword, setKeyword] = useState("");
+  const [replyData, setReplyData] = useState(item.replys);
+
+  const updateReplyData = async () => {
+    const apiURL = `/community/${item.id}`;
+    try {
+      const response = await api.get(apiURL);
+      setReplyData(response.data.result.replys);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const replySubmitHandler = async () => {
+    // console.log(keyword);
+    const userData = {
+      reply: keyword,
+    };
+    const apiURL = `/community/${item.id}/reply`;
+    try {
+      const response = await api.post(apiURL, userData);
+      if (response.data.success) {
+        Alert.alert("댓글 작성 완료!");
+        updateReplyData();
+        setKeyword("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const renderItem = ({ item }) => {
     const date = convertDate(item.createDate);
     return (
@@ -24,7 +56,7 @@ const CommunityDetail = ({ navigation, route }) => {
       </View>
     );
   };
-  console.log("item", item);
+  // console.log("item", item);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
@@ -64,11 +96,32 @@ const CommunityDetail = ({ navigation, route }) => {
             </View>
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={item.replys}
+              data={replyData}
               renderItem={renderItem}
               removeClippedSubviews
               style={styles.replyContainer}
             />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              returnKeyType="search"
+              spellCheck={false}
+              autoCorrect={false}
+              autoCapitalize="none"
+              value={keyword}
+              onChangeText={(text) => setKeyword(text)}
+              allowFontScaling={false}
+              style={styles.inputStyle}
+              autoFocus
+              ref={inputRef}
+              onSubmitEditing={() => console.log(1)}
+            />
+            <TouchableOpacity
+              style={styles.touchIconStyle}
+              onPress={replySubmitHandler}
+            >
+              <Text>등록</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -178,6 +231,33 @@ const styles = StyleSheet.create({
     color: "#573353",
     fontWeight: "500",
     fontSize: 14,
+  },
+  //input
+  inputContainer: {
+    height: 68,
+    // backgroundColor: "#828282",
+    borderWidth: 0.5,
+    borderColor: "#E0E0E0",
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 11,
+    gap: 16,
+  },
+  inputWrapper: {},
+  inputStyle: {
+    flex: 1,
+    paddingVertical: 12,
+    paddingRight: 12,
+    color: "#828282",
+    fontSize: 15,
+    fontWeight: "500",
+    alignItems: "center",
+    backgroundColor: "#F5F5F5",
+    height: 38,
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 10,
   },
 });
 
