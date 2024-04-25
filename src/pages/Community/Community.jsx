@@ -29,7 +29,7 @@ const Community = ({ navigation, route }) => {
       };
       try {
         const response = await api.get(apiURL, { params: paramsData });
-        console.log(response.data.result.content);
+        // console.log(response.data.result.content);
         setCommunityeData(response.data.result.content);
       } catch (error) {
         console.log(error);
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 42,
     // flex: 1,
     minHeight: 600,
+    marginBottom: 300,
   },
   //card
   card: {

@@ -50,7 +50,7 @@ const Router = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="MainTab" component={MainTab} />
+      {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="Login" component={Login} />
@@ -58,7 +58,7 @@ const Router = () => {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="FindPassword" component={FindPassword} />
       <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
-      {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
+      <Stack.Screen name="MainTab" component={MainTab} />
       <Stack.Screen name="CampingDetail" component={CampingDetail} />
       <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
       <Stack.Screen name="CommunityDetail" component={CommunityDetail} />

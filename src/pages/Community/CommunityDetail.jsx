@@ -104,7 +104,6 @@ const CommunityDetail = ({ navigation, route }) => {
           </View>
           <View style={styles.inputContainer}>
             <TextInput
-              returnKeyType="search"
               spellCheck={false}
               autoCorrect={false}
               autoCapitalize="none"
@@ -244,7 +243,6 @@ const styles = StyleSheet.create({
     padding: 11,
     gap: 16,
   },
-  inputWrapper: {},
   inputStyle: {
     flex: 1,
     paddingVertical: 12,
